@@ -35,9 +35,14 @@ const int MAIN_CYCLE_DELAY = 50;
 // задержка при авто выключении в мс
 const int AUTO_OFF_DELAY = 15000;
 
+// задержка при авто включении в мс
+const int AUTO_ON_DELAY = 2000;
+
 long autoOffCounter = 0;
 long autoOffMaxCounter = 0;
 
+long autoOnCounter = 0;
+long autoOnMaxCounter = 0;
 
 void pushReceiverPowerButton() {
 	digitalWrite(RECEIVER_POWER_BT, HIGH);
@@ -56,8 +61,14 @@ void setup() {
 	// перевод задержки авто выключения в количество итераций главного цикла
 	autoOffMaxCounter = round(AUTO_OFF_DELAY / MAIN_CYCLE_DELAY);
 	// коррекция погрешности таймера
-	autoOffMaxCounter = autoOffMaxCounter - round(autoOffMaxCounter * 0.4);
+	autoOffMaxCounter = autoOffMaxCounter - round(autoOffMaxCounter * 0.2);
 	autoOffCounter = 0;
+
+	// перевод задержки авто включения в количество итераций главного цикла
+	autoOnMaxCounter = round(AUTO_ON_DELAY / MAIN_CYCLE_DELAY);
+	// коррекция погрешности таймера
+	autoOnMaxCounter = autoOnMaxCounter - round(autoOnMaxCounter * 0.2);
+	autoOnCounter = 0;
 }
 
 
@@ -77,7 +88,14 @@ void loop() {
 
 	if (digitalRead(AUTO_ON) == HIGH) {
 		if (digitalRead(RECEIVER_POWER) == LOW && digitalRead(TV_POWER) == HIGH) {
-			pushReceiverPowerButton();
+			autoOnCounter++;
+
+			if (autoOnCounter >= autoOnMaxCounter) {
+				pushReceiverPowerButton();
+				autoOnCounter = 0;
+			}
+		} else {
+			autoOnCounter = 0;
 		}
 	}
 
