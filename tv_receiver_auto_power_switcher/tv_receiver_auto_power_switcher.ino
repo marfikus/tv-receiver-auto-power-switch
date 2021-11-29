@@ -23,11 +23,11 @@ const byte TV_POWER = 0;
 // сигнал состояния приставки
 const byte RECEIVER_POWER = 1;
 // тумблер настройки авто выключения
-const byte AUTO_OFF = 2;
+const byte AUTO_OFF = 4;
 // тумблер настройки авто включения
 const byte AUTO_ON = 3;
 // кнопка управления питанием приставки
-const byte RECEIVER_POWER_BT = 4;
+const byte RECEIVER_POWER_BT = 2;
 
 // интервал главного цикла в мс
 const int MAIN_CYCLE_DELAY = 50;
