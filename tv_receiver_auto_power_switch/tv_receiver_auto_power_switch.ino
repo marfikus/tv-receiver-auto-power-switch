@@ -33,7 +33,7 @@ const byte RECEIVER_POWER_BT = 2;
 const int MAIN_CYCLE_DELAY = 50;
 
 // задержка при авто выключении в мс
-const int AUTO_OFF_DELAY = 15000;
+const int AUTO_OFF_DELAY = 25000;
 
 // задержка при авто включении в мс
 const int AUTO_ON_DELAY = 2000;
