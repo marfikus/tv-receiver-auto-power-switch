@@ -80,8 +80,12 @@ void setup() {
 
 
 void loop() {
-    if (digitalRead(AUTO_OFF) == HIGH || digitalRead(AUTO_ON) == HIGH) {
-        if (digitalRead(RECEIVER_POWER) == HIGH && digitalRead(TV_POWER) == LOW) {
+    if (digitalRead(AUTO_OFF) == HIGH 
+        || digitalRead(AUTO_ON) == HIGH) {
+
+        if (digitalRead(RECEIVER_POWER) == HIGH 
+            && digitalRead(TV_POWER) == LOW) {
+
             autoOffCounter++;
 
             if (autoOffCounter >= autoOffMaxCounter) {
@@ -94,7 +98,9 @@ void loop() {
     }
 
     if (digitalRead(AUTO_ON) == HIGH) {
-        if (digitalRead(RECEIVER_POWER) == LOW && digitalRead(TV_POWER) == HIGH) {
+        if (digitalRead(RECEIVER_POWER) == LOW 
+            && digitalRead(TV_POWER) == HIGH) {
+
             autoOnCounter++;
 
             if (autoOnCounter >= autoOnMaxCounter) {
@@ -106,7 +112,10 @@ void loop() {
         }
     }
 
-    if (autoOffCounter == 0 && autoOnCounter == 0 && millis() >= RESTART_TIME) {
+    if (autoOffCounter == 0 
+        && autoOnCounter == 0 
+        && millis() >= RESTART_TIME) {
+
         resetFunc();
     }
 
